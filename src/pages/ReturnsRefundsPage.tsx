@@ -1,6 +1,6 @@
-import React from 'react';
-import { POLICIES_DATA } from '../data/policiesData';
-import { RotateCcw, AlertCircle } from 'lucide-react';
+import React from "react";
+import { POLICIES_DATA } from "../data/policiesData";
+import { RotateCcw, AlertCircle } from "lucide-react";
 
 export const ReturnsRefundsPage: React.FC = () => {
   const policy = POLICIES_DATA.returns;
@@ -21,18 +21,25 @@ export const ReturnsRefundsPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#EFE9DB] border border-[#B49A63]/60 flex items-start gap-3 text-xs text-[#252923]">
+        <div className="p-4 rounded-lg bg-[#EFE9DB] border border-[#B49A63]/60 flex items-start gap-3 text-xs text-[#252923]">
           <AlertCircle className="w-5 h-5 text-[#B49A63] shrink-0 mt-0.5" />
           <p>
-            <strong>Consumable Product Protocol:</strong> In compliance with hygienic and safety standards for botanical preparations, returns are valid for 7 days post-delivery only if the original packaging seal is unbroken.
+            <strong>Consumable Product Protocol:</strong> In compliance with
+            hygienic and safety standards for botanical preparations, returns
+            are valid for 7 days post-delivery only if the original packaging
+            seal is unbroken.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 border border-[#E5DFD3] shadow-xs space-y-8">
+        <div className="bg-white rounded-xl p-8 border border-[#E5DFD3] shadow-xs space-y-8">
           {policy.sections.map((sec, idx) => (
             <div key={idx} className="space-y-2">
-              <h2 className="font-serif text-lg font-bold text-[#183F32]">{sec.heading}</h2>
-              <p className="text-xs sm:text-sm text-[#77796F] leading-relaxed">{sec.content}</p>
+              <h2 className="font-serif text-lg font-bold text-[#183F32]">
+                {sec.heading}
+              </h2>
+              <p className="text-xs sm:text-sm text-[#77796F] leading-relaxed">
+                {sec.content}
+              </p>
             </div>
           ))}
         </div>

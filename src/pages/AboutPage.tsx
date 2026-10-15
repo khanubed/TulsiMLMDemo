@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Leaf, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Leaf, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
 
 export const AboutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ export const AboutPage: React.FC = () => {
             The Living Spirit of Indian Botanicals
           </h1>
           <p className="text-base sm:text-lg text-[#77796F] max-w-2xl mx-auto leading-relaxed">
-            Tulsi Swaraj was created from a quiet conviction: that the sacred botanical knowledge of India belongs at the center of honest, unadorned everyday life.
+            Tulsi Swaraj was created from a quiet conviction: that the sacred
+            botanical knowledge of India belongs at the center of honest,
+            unadorned everyday life.
           </p>
         </div>
       </section>
@@ -25,7 +27,7 @@ export const AboutPage: React.FC = () => {
       {/* Cinematic Banner */}
       <section className="py-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl overflow-hidden border border-[#E5DFD3] shadow-lg aspect-16/9 sm:aspect-21/9 bg-[#EFE9DB]">
+          <div className="rounded-xl overflow-hidden border border-[#E5DFD3] shadow-lg aspect-16/9 sm:aspect-21/9 bg-[#EFE9DB]">
             <img
               src="/images/brand_story.jpg"
               alt="Artisanal mortar and pestle with fresh tulsi leaves"
@@ -43,42 +45,57 @@ export const AboutPage: React.FC = () => {
               Rooted in Humility, Not Slogans
             </h2>
             <p>
-              Across Indian households for millennia, the Tulsi shrub has held a sanctified courtyard space. It was never treated merely as a commodity; it represented morning gratitude, respiratory cleansing, and the gentle harmonic balance of body and mind.
+              Across Indian households for millennia, the Tulsi shrub has held a
+              sanctified courtyard space. It was never treated merely as a
+              commodity; it represented morning gratitude, respiratory
+              cleansing, and the gentle harmonic balance of body and mind.
             </p>
             <p>
-              In contemporary commercial wellness, however, ancient herbs are frequently obscured behind synthetic fillers, hyper-marketed miracles, or multi-tiered sales rhetoric. <strong>Tulsi Swaraj rejects this distortion.</strong>
+              In contemporary commercial wellness, however, ancient herbs are
+              frequently obscured behind synthetic fillers, hyper-marketed
+              miracles, or multi-tiered sales rhetoric.{" "}
+              <strong>Tulsi Swaraj rejects this distortion.</strong>
             </p>
           </div>
 
           {/* Three Core Principles */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 py-6 border-y border-[#E5DFD3]">
             <div className="space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <Leaf className="w-5 h-5 text-[#A9B7A0]" />
               </div>
-              <h3 className="font-serif font-bold text-base text-[#183F32]">Botanical Purity</h3>
+              <h3 className="font-serif font-bold text-base text-[#183F32]">
+                Botanical Purity
+              </h3>
               <p className="text-xs text-[#77796F]">
-                Focused formulation utilizing whole herbs and traditional shade-drying methods.
+                Focused formulation utilizing whole herbs and traditional
+                shade-drying methods.
               </p>
             </div>
 
             <div className="space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5 text-[#A9B7A0]" />
               </div>
-              <h3 className="font-serif font-bold text-base text-[#183F32]">Clear Ethics</h3>
+              <h3 className="font-serif font-bold text-base text-[#183F32]">
+                Clear Ethics
+              </h3>
               <p className="text-xs text-[#77796F]">
-                No invented medical claims or counterfeit certificates. Absolute transparency.
+                No invented medical claims or counterfeit certificates. Absolute
+                transparency.
               </p>
             </div>
 
             <div className="space-y-2">
-              <div className="w-9 h-9 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-[#A9B7A0]" />
               </div>
-              <h3 className="font-serif font-bold text-base text-[#183F32]">Honest Value</h3>
+              <h3 className="font-serif font-bold text-base text-[#183F32]">
+                Honest Value
+              </h3>
               <p className="text-xs text-[#77796F]">
-                Priced accessibly at ₹500 so everyday wellness can remain sustained and uncompromised.
+                Priced accessibly at ₹500 so everyday wellness can remain
+                sustained and uncompromised.
               </p>
             </div>
           </div>
@@ -88,15 +105,18 @@ export const AboutPage: React.FC = () => {
               Our Flagship Focus: Tulsi Meta Ved Herbal Mix
             </h2>
             <p>
-              Rather than overwhelming visitors with dozens of catalog variations, we channel all our artisanal devotion into perfected batch preparations of Tulsi Meta Ved Herbal Mix.
+              Rather than overwhelming visitors with dozens of catalog
+              variations, we channel all our artisanal devotion into perfected
+              batch preparations of Tulsi Meta Ved Herbal Mix.
             </p>
             <p>
-              Whether prepared with hot spring water at sunrise or sipped after sunset, it offers a grounded moment of self-care and renewal.
+              Whether prepared with hot spring water at sunrise or sipped after
+              sunset, it offers a grounded moment of self-care and renewal.
             </p>
           </div>
 
           {/* Call to action card */}
-          <div className="p-8 rounded-3xl bg-[#EFE9DB] border border-[#A9B7A0] flex flex-col sm:flex-row items-center justify-between gap-6 mt-8">
+          <div className="p-8 rounded-xl bg-[#EFE9DB] border border-[#A9B7A0] flex flex-col sm:flex-row items-center justify-between gap-6 mt-8">
             <div className="space-y-1 text-center sm:text-left">
               <h3 className="font-serif text-xl font-bold text-[#183F32]">
                 Experience Tulsi Meta Ved
@@ -107,8 +127,8 @@ export const AboutPage: React.FC = () => {
             </div>
 
             <button
-              onClick={() => navigate('/products/tulsi-meta-ved-herbal-mix')}
-              className="px-6 py-3 bg-[#183F32] text-[#F8F5ED] rounded-xl text-xs font-semibold hover:bg-[#285642] transition-colors flex items-center gap-2 cursor-pointer shrink-0 shadow-sm"
+              onClick={() => navigate("/products/tulsi-meta-ved-herbal-mix")}
+              className="px-6 py-3 bg-[#183F32] text-[#F8F5ED] rounded-md text-xs font-semibold hover:bg-[#285642] transition-colors flex items-center gap-2 cursor-pointer shrink-0 shadow-sm"
             >
               Discover the Blend
               <ArrowRight className="w-4 h-4" />

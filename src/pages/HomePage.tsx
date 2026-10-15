@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -20,6 +20,16 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { addItem } = useCartStore();
   const [openFaq, setOpenFaq] = useState<string | null>("faq-1");
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const handleAddToCart = () => {
     addItem(FLAGSHIP_PRODUCT, 1);
@@ -36,104 +46,96 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F8F5ED]">
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-[#E5DFD3]">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Column: Typography & CTAs */}
-            <div className="lg:col-span-6 space-y-6 z-10 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFE9DB] border border-[#A9B7A0]/60 text-xs font-semibold text-[#183F32]">
-                <Leaf className="w-3.5 h-3.5 text-[#285642]" />
-                <span>Ayurvedic Botanical Living</span>
-                <span className="text-[#B49A63]">•</span>
-                <span className="text-[#285642] font-bold">₹500</span>
-              </div>
+      {/* 1. HERO SECTION - FULL-WIDTH CINEMATIC BACKGROUND VIDEO */}
+      <section className="relative overflow-hidden min-h-[580px] sm:min-h-[640px] lg:h-[720px] lg:max-h-[780px] flex items-center bg-[#183F32] border-b border-[#285642]/60">
+        {/* Cinematic Background Video with Poster Fallback & Prefers-Reduced-Motion */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          {prefersReducedMotion || videoError ? (
+            <img
+              src="/images/hero_botanical.jpg"
+              alt="Tulsi Swaraj Herbal Preparation"
+              className="w-full h-full object-cover object-[68%_center] sm:object-[68%_center] lg:object-[70%_center]"
+            />
+          ) : (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/images/hero_botanical.jpg"
+              onError={() => setVideoError(true)}
+              className="w-full h-full object-cover object-[65%_center] sm:object-[68%_center] lg:object-[70%_center]"
+            >
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+            </video>
+          )}
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#183F32] leading-[1.12] tracking-tight">
-                Rooted in Nature.
-                <br />
-                <span className="italic font-normal text-[#285642]">
-                  Made for Everyday Rituals.
-                </span>
-              </h1>
+          {/* Subtle Forest-Green Gradient Overlay */}
+          {/* Mobile: Stronger vertical-to-horizontal gradient to ensure compact text stays readable while product shines */}
+          {/* Desktop: Strongest on left (for text), gradually transparent towards center-right (for jar & label visibility) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#183F32]/95 via-[#183F32]/75 to-[#183F32]/45 sm:bg-gradient-to-r sm:from-[#183F32]/95 sm:via-[#183F32]/70 sm:to-transparent lg:from-[#183F32]/95 lg:via-[#183F32]/60 lg:to-transparent pointer-events-none" />
 
-              <p className="text-base sm:text-lg text-[#77796F] max-w-xl mx-auto lg:mx-0 leading-relaxed font-sans">
-                Discover Tulsi Swaraj and our mindful approach to bringing pure,
-                thoughtfully prepared Indian herbal blends into your daily
-                morning and evening wellness routines.
-              </p>
+          {/* Bottom subtle edge vignette */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#183F32]/60 to-transparent pointer-events-none" />
+        </div>
 
-              {/* Price & Action Cluster */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <button
-                  onClick={() =>
-                    navigate("/products/tulsi-meta-ved-herbal-mix")
-                  }
-                  className="w-full sm:w-auto px-8 py-3.5 bg-[#183F32] text-[#F8F5ED] rounded-xl text-sm font-semibold tracking-wide hover:bg-[#285642] transition-all shadow-md flex items-center justify-center gap-2 group cursor-pointer"
-                >
-                  Explore the Product
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-
-                <Link
-                  to="/about"
-                  className="w-full sm:w-auto px-7 py-3.5 bg-transparent border border-[#285642] text-[#183F32] rounded-xl text-sm font-semibold hover:bg-[#EFE9DB] transition-colors text-center"
-                >
-                  Our Story
-                </Link>
-              </div>
-
-              {/* Trust markers */}
-              <div className="pt-6 grid grid-cols-3 gap-3 border-t border-[#E5DFD3] text-left">
-                <div>
-                  <p className="font-serif text-lg font-bold text-[#183F32]">
-                    100%
-                  </p>
-                  <p className="text-xs text-[#77796F]">Botanical Heritage</p>
-                </div>
-                <div>
-                  <p className="font-serif text-lg font-bold text-[#183F32]">
-                    ₹500
-                  </p>
-                  <p className="text-xs text-[#77796F]">Transparent Pricing</p>
-                </div>
-                <div>
-                  <p className="font-serif text-lg font-bold text-[#183F32]">
-                    Pan-India
-                  </p>
-                  <p className="text-xs text-[#77796F]">Direct Dispatch</p>
-                </div>
-              </div>
+        {/* Content Container: Kept within existing max-width container, text confined to left 45% */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="w-full sm:max-w-xl lg:max-w-[48%] xl:max-w-[45%] space-y-5 sm:space-y-6 text-left">
+            {/* Eyebrow badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#183F32]/80 backdrop-blur-md border border-[#A9B7A0]/40 text-xs font-semibold text-[#F8F5ED] shadow-sm">
+              <Leaf className="w-3.5 h-3.5 text-[#A9B7A0]" />
+              <span>Ayurvedic Botanical Living</span>
+              <span className="text-[#B49A63]">·</span>
+              <span className="text-[#F8F5ED] font-bold">₹500</span>
             </div>
 
-            {/* Right Column: Hero Art Composition */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Decorative border frame */}
-                <div className="absolute -inset-3 rounded-3xl bg-[#EFE9DB]/70 -rotate-1 -z-10" />
+            {/* Main Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-[54px] xl:text-6xl font-serif text-[#F8F5ED] leading-[1.12] tracking-tight">
+              Rooted in Nature.
+              <br />
+              <span className="italic font-normal text-[#A9B7A0] sm:text-[#F8F5ED]/90 block mt-1 sm:mt-2">
+                Made for Everyday Rituals.
+              </span>
+            </h1>
 
-                <div className="overflow-hidden rounded-2xl shadow-xl border border-[#E5DFD3] bg-[#EFE9DB] aspect-16/10">
-                  <img
-                    src="/images/hero_botanical.jpg"
-                    alt="Tulsi Swaraj Herbal Preparation on stone pedestal"
-                    className="w-full h-full object-cover object-center transform hover:scale-102 transition-transform duration-700"
-                  />
-                </div>
+            {/* Supporting Paragraph */}
+            <p className="text-sm sm:text-base lg:text-lg text-[#F8F5ED]/90 max-w-lg leading-relaxed font-sans">
+              Discover Tulsi Swaraj and our mindful approach to bringing pure, thoughtfully prepared Indian herbal blends into your daily morning and evening wellness routines.
+            </p>
 
-                {/* Floating pill badge */}
-                <div className="absolute -bottom-4 -left-3 sm:bottom-4 sm:-left-4 bg-[#F8F5ED]/95 backdrop-blur-md px-4 py-3 rounded-xl border border-[#A9B7A0]/70 shadow-lg flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#183F32] flex items-center justify-center text-[#F8F5ED]">
-                    <Sparkles className="w-5 h-5 text-[#B49A63]" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-serif font-bold text-[#183F32]">
-                      Tulsi Meta Ved Mix
-                    </p>
-                    <p className="text-[11px] text-[#77796F]">
-                      Flagship Indian Formulation • ₹500
-                    </p>
-                  </div>
-                </div>
+            {/* Action Buttons */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-4">
+              <button
+                onClick={() => navigate('/products/tulsi-meta-ved-herbal-mix')}
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#F8F5ED] text-[#183F32] rounded-xl text-sm font-semibold tracking-wide hover:bg-white hover:shadow-lg transition-all shadow-md flex items-center justify-center gap-2 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#B49A63] focus:ring-offset-2 focus:ring-offset-[#183F32]"
+              >
+                Explore the Product
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <Link
+                to="/about"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#183F32]/40 border border-[#F8F5ED]/40 text-[#F8F5ED] hover:bg-[#F8F5ED]/15 backdrop-blur-sm rounded-xl text-sm font-semibold transition-colors text-center focus:outline-none focus:ring-2 focus:ring-[#B49A63] focus:ring-offset-2 focus:ring-offset-[#183F32]"
+              >
+                Our Story
+              </Link>
+            </div>
+
+            {/* Trust Markers */}
+            <div className="pt-5 grid grid-cols-3 gap-3 border-t border-[#F8F5ED]/20 text-left">
+              <div className="p-1">
+                <p className="font-serif text-base sm:text-lg font-bold text-[#F8F5ED]">100%</p>
+                <p className="text-[11px] sm:text-xs text-[#A9B7A0] leading-tight mt-0.5">Botanical Heritage</p>
+              </div>
+              <div className="p-1">
+                <p className="font-serif text-base sm:text-lg font-bold text-[#F8F5ED]">₹500</p>
+                <p className="text-[11px] sm:text-xs text-[#A9B7A0] leading-tight mt-0.5">Transparent Price</p>
+              </div>
+              <div className="p-1">
+                <p className="font-serif text-base sm:text-lg font-bold text-[#F8F5ED]">Free</p>
+                <p className="text-[11px] sm:text-xs text-[#A9B7A0] leading-tight mt-0.5">India Dispatch</p>
               </div>
             </div>
           </div>
@@ -184,10 +186,10 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-[#EFE9DB]/40 rounded-3xl p-6 sm:p-10 border border-[#E5DFD3]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-[#EFE9DB]/40 rounded-xl p-6 sm:p-10 border border-[#E5DFD3]">
             {/* Product Image */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden border border-[#E5DFD3] shadow-lg bg-white">
+              <div className="relative w-full max-w-md aspect-square rounded-lg overflow-hidden border border-[#E5DFD3] shadow-lg bg-white">
                 <img
                   src={FLAGSHIP_PRODUCT.images[0].url}
                   alt={FLAGSHIP_PRODUCT.name}
@@ -230,13 +232,13 @@ export const HomePage: React.FC = () => {
 
               {/* Key Specs Pills */}
               <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 rounded-lg bg-white/70 border border-[#E5DFD3]">
+                <div className="p-3 rounded-sm bg-white/70 border border-[#E5DFD3]">
                   <span className="text-[#77796F] block">Packaging</span>
                   <span className="font-semibold text-[#183F32]">
                     Ceramic Sealed Jar (100g)*
                   </span>
                 </div>
-                <div className="p-3 rounded-lg bg-white/70 border border-[#E5DFD3]">
+                <div className="p-3 rounded-sm bg-white/70 border border-[#E5DFD3]">
                   <span className="text-[#77796F] block">Key Herbs</span>
                   <span className="font-semibold text-[#183F32]">
                     Krishna Tulsi, Rama Tulsi
@@ -248,7 +250,7 @@ export const HomePage: React.FC = () => {
               <div className="pt-2 flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 py-3.5 px-6 rounded-xl border border-[#183F32] text-[#183F32] font-semibold text-sm hover:bg-[#EFE9DB] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  className="flex-1 py-3.5 px-6 rounded-md border border-[#183F32] text-[#183F32] font-semibold text-sm hover:bg-[#EFE9DB] transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   Add to Cart
@@ -256,7 +258,7 @@ export const HomePage: React.FC = () => {
 
                 <button
                   onClick={handleBuyNow}
-                  className="flex-1 py-3.5 px-6 rounded-xl bg-[#183F32] text-[#F8F5ED] font-semibold text-sm hover:bg-[#285642] transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                  className="flex-1 py-3.5 px-6 rounded-md bg-[#183F32] text-[#F8F5ED] font-semibold text-sm hover:bg-[#285642] transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                 >
                   Buy Now (₹500)
                   <ArrowRight className="w-4 h-4" />
@@ -281,7 +283,7 @@ export const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Visual Left */}
             <div className="lg:col-span-5">
-              <div className="rounded-2xl overflow-hidden border border-[#E5DFD3] shadow-md aspect-4/3">
+              <div className="rounded-lg overflow-hidden border border-[#E5DFD3] shadow-md aspect-4/3">
                 <img
                   src="/images/botanical_ingredients.jpg"
                   alt="Raw botanical ingredients and fresh tulsi on limestone"
@@ -314,7 +316,7 @@ export const HomePage: React.FC = () => {
                 {FLAGSHIP_PRODUCT.verifiedIngredients.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 bg-white rounded-xl border border-[#E5DFD3] flex items-center gap-3 text-sm text-[#252923]"
+                    className="p-3.5 bg-white rounded-md border border-[#E5DFD3] flex items-center gap-3 text-sm text-[#252923]"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[#285642] shrink-0" />
                     <span>{item}</span>
@@ -322,7 +324,7 @@ export const HomePage: React.FC = () => {
                 ))}
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F8F5ED] border border-[#A9B7A0] text-xs text-[#285642] space-y-1">
+              <div className="p-4 rounded-md bg-[#F8F5ED] border border-[#A9B7A0] text-xs text-[#285642] space-y-1">
                 <div className="font-semibold flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-[#183F32]" />
                   Verified Brand Standard
@@ -351,8 +353,8 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 bg-[#EFE9DB]/50 rounded-2xl border border-[#E5DFD3] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+            <div className="p-6 bg-[#EFE9DB]/50 rounded-lg border border-[#E5DFD3] space-y-3">
+              <div className="w-10 h-10 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <Leaf className="w-5 h-5 text-[#A9B7A0]" />
               </div>
               <h3 className="font-serif text-lg font-bold text-[#183F32]">
@@ -364,8 +366,8 @@ export const HomePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-6 bg-[#EFE9DB]/50 rounded-2xl border border-[#E5DFD3] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+            <div className="p-6 bg-[#EFE9DB]/50 rounded-lg border border-[#E5DFD3] space-y-3">
+              <div className="w-10 h-10 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5 text-[#A9B7A0]" />
               </div>
               <h3 className="font-serif text-lg font-bold text-[#183F32]">
@@ -377,8 +379,8 @@ export const HomePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-6 bg-[#EFE9DB]/50 rounded-2xl border border-[#E5DFD3] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+            <div className="p-6 bg-[#EFE9DB]/50 rounded-lg border border-[#E5DFD3] space-y-3">
+              <div className="w-10 h-10 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-[#A9B7A0]" />
               </div>
               <h3 className="font-serif text-lg font-bold text-[#183F32]">
@@ -390,8 +392,8 @@ export const HomePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-6 bg-[#EFE9DB]/50 rounded-2xl border border-[#E5DFD3] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
+            <div className="p-6 bg-[#EFE9DB]/50 rounded-lg border border-[#E5DFD3] space-y-3">
+              <div className="w-10 h-10 rounded-md bg-[#183F32] text-[#F8F5ED] flex items-center justify-center">
                 <Heart className="w-5 h-5 text-[#A9B7A0]" />
               </div>
               <h3 className="font-serif text-lg font-bold text-[#183F32]">
@@ -449,7 +451,7 @@ export const HomePage: React.FC = () => {
               <div className="pt-2">
                 <button
                   onClick={handleAddToCart}
-                  className="px-6 py-3 bg-[#183F32] text-[#F8F5ED] rounded-xl text-sm font-semibold hover:bg-[#285642] transition-colors inline-flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 bg-[#183F32] text-[#F8F5ED] rounded-md text-sm font-semibold hover:bg-[#285642] transition-colors inline-flex items-center gap-2 cursor-pointer"
                 >
                   Add to Cart • ₹500
                   <ArrowRight className="w-4 h-4" />
@@ -459,7 +461,7 @@ export const HomePage: React.FC = () => {
 
             {/* Lifestyle Image */}
             <div className="lg:col-span-5">
-              <div className="rounded-3xl overflow-hidden shadow-xl border border-[#E5DFD3] bg-white aspect-square">
+              <div className="rounded-xl overflow-hidden shadow-xl border border-[#E5DFD3] bg-white aspect-square">
                 <img
                   src="/images/product_lifestyle.jpg"
                   alt="Herbal morning tea infusion ritual with Tulsi Meta Ved jar"
@@ -480,7 +482,7 @@ export const HomePage: React.FC = () => {
           <h2 className="text-2xl sm:text-3xl font-serif text-[#183F32]">
             Verified Feedback Protocol
           </h2>
-          <div className="p-6 rounded-2xl bg-[#EFE9DB]/60 border border-[#A9B7A0] max-w-xl mx-auto space-y-2">
+          <div className="p-6 rounded-lg bg-[#EFE9DB]/60 border border-[#A9B7A0] max-w-xl mx-auto space-y-2">
             <ShieldCheck className="w-8 h-8 text-[#183F32] mx-auto" />
             <h3 className="font-serif text-base font-semibold text-[#183F32]">
               Real Reviews from Genuine Orders Only
@@ -517,7 +519,7 @@ export const HomePage: React.FC = () => {
               return (
                 <div
                   key={faq.id}
-                  className="bg-white rounded-xl border border-[#E5DFD3] overflow-hidden transition-all"
+                  className="bg-white rounded-md border border-[#E5DFD3] overflow-hidden transition-all"
                 >
                   <button
                     onClick={() => toggleFaq(faq.id)}
@@ -574,7 +576,7 @@ export const HomePage: React.FC = () => {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={handleBuyNow}
-              className="w-full sm:w-auto px-8 py-3.5 bg-[#B49A63] text-[#183F32] font-serif font-bold text-base rounded-xl hover:bg-[#d0b47b] transition-colors shadow-lg cursor-pointer flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-3.5 bg-[#B49A63] text-[#183F32] font-serif font-bold text-base rounded-md hover:bg-[#d0b47b] transition-colors shadow-lg cursor-pointer flex items-center justify-center gap-2"
             >
               Order Now • ₹500
               <ArrowRight className="w-4 h-4" />
@@ -582,7 +584,7 @@ export const HomePage: React.FC = () => {
 
             <button
               onClick={() => navigate("/products/tulsi-meta-ved-herbal-mix")}
-              className="w-full sm:w-auto px-7 py-3.5 border border-[#A9B7A0] text-[#F8F5ED] rounded-xl text-sm font-semibold hover:bg-[#285642] transition-colors cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 border border-[#A9B7A0] text-[#F8F5ED] rounded-md text-sm font-semibold hover:bg-[#285642] transition-colors cursor-pointer"
             >
               View Full Product Specs
             </button>

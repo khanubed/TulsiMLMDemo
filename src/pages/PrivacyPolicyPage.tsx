@@ -1,6 +1,6 @@
-import React from 'react';
-import { POLICIES_DATA } from '../data/policiesData';
-import { Lock } from 'lucide-react';
+import React from "react";
+import { POLICIES_DATA } from "../data/policiesData";
+import { Lock } from "lucide-react";
 
 export const PrivacyPolicyPage: React.FC = () => {
   const policy = POLICIES_DATA.privacy;
@@ -21,11 +21,15 @@ export const PrivacyPolicyPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 border border-[#E5DFD3] shadow-xs space-y-8">
+        <div className="bg-white rounded-xl p-8 border border-[#E5DFD3] shadow-xs space-y-8">
           {policy.sections.map((sec, idx) => (
             <div key={idx} className="space-y-2">
-              <h2 className="font-serif text-lg font-bold text-[#183F32]">{sec.heading}</h2>
-              <p className="text-xs sm:text-sm text-[#77796F] leading-relaxed">{sec.content}</p>
+              <h2 className="font-serif text-lg font-bold text-[#183F32]">
+                {sec.heading}
+              </h2>
+              <p className="text-xs sm:text-sm text-[#77796F] leading-relaxed">
+                {sec.content}
+              </p>
             </div>
           ))}
         </div>

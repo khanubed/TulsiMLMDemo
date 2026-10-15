@@ -42,7 +42,7 @@ export const ContactPage: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start max-w-5xl mx-auto">
           {/* Contact Details Card */}
-          <div className="lg:col-span-5 bg-[#EFE9DB]/70 rounded-3xl p-8 border border-[#E5DFD3] space-y-6">
+          <div className="lg:col-span-5 bg-[#EFE9DB]/70 rounded-xl p-8 border border-[#E5DFD3] space-y-6">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-[#183F32] flex items-center justify-center text-[#F8F5ED]">
                 <Leaf className="w-4 h-4 text-[#A9B7A0]" />
@@ -102,7 +102,7 @@ export const ContactPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#A9B7A0] text-xs text-[#77796F]">
+            <div className="p-4 rounded-md bg-white border border-[#A9B7A0] text-xs text-[#77796F]">
               <p>
                 *For order tracking or refunds, authenticated customers can also
                 open tickets instantly via their dashboard.
@@ -111,7 +111,7 @@ export const ContactPage: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-8 border border-[#E5DFD3] shadow-xs">
+          <div className="lg:col-span-7 bg-white rounded-xl p-8 border border-[#E5DFD3] shadow-xs">
             {submitted ? (
               <div className="text-center py-12 space-y-4">
                 <CheckCircle2 className="w-12 h-12 text-[#285642] mx-auto" />
@@ -146,7 +146,7 @@ export const ContactPage: React.FC = () => {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="e.g. Meera Nair"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
+                      className="w-full px-3.5 py-2.5 rounded-md border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
                     />
                   </div>
 
@@ -160,7 +160,7 @@ export const ContactPage: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="meera@example.in"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
+                      className="w-full px-3.5 py-2.5 rounded-md border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export const ContactPage: React.FC = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+91 Mobile number"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
+                      className="w-full px-3.5 py-2.5 rounded-md border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
                     />
                   </div>
 
@@ -189,7 +189,7 @@ export const ContactPage: React.FC = () => {
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="e.g. Bulk order inquiry"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
+                      className="w-full px-3.5 py-2.5 rounded-md border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
                     />
                   </div>
                 </div>
@@ -204,13 +204,13 @@ export const ContactPage: React.FC = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us how we can help..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
+                    className="w-full px-3.5 py-2.5 rounded-md border border-[#A9B7A0] text-xs focus:ring-1 focus:ring-[#183F32]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#183F32] text-[#F8F5ED] rounded-xl text-xs font-semibold hover:bg-[#285642] transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
+                  className="px-6 py-3 bg-[#183F32] text-[#F8F5ED] rounded-md text-xs font-semibold hover:bg-[#285642] transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Send Message</span>

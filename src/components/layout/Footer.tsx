@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       <div className="border-b border-[#285642] py-8">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-            <div className="flex items-center gap-4 justify-center md:justify-start p-4 rounded-xl bg-[#285642]/40 border border-[#285642]">
+            <div className="flex items-center gap-4 justify-center md:justify-start p-4 rounded-md bg-[#285642]/40 border border-[#285642]">
               <Leaf className="w-8 h-8 text-[#A9B7A0] shrink-0" />
               <div>
                 <h4 className="font-serif text-base font-semibold">
@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 justify-center md:justify-start p-4 rounded-xl bg-[#285642]/40 border border-[#285642]">
+            <div className="flex items-center gap-4 justify-center md:justify-start p-4 rounded-md bg-[#285642]/40 border border-[#285642]">
               <Truck className="w-8 h-8 text-[#A9B7A0] shrink-0" />
               <div>
                 <h4 className="font-serif text-base font-semibold">
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 justify-center md:justify-start p-4 rounded-xl bg-[#285642]/40 border border-[#285642]">
+            <div className="flex items-center gap-4 justify-center md:justify-start p-4 rounded-md bg-[#285642]/40 border border-[#285642]">
               <ShieldCheck className="w-8 h-8 text-[#A9B7A0] shrink-0" />
               <div>
                 <h4 className="font-serif text-base font-semibold">
